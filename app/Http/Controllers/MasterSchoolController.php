@@ -129,7 +129,10 @@ class MasterSchoolController extends Controller
 
             if (!empty($database)) {
                 shell_exec('mysqladmin -u ' . env('DB_USERNAME') . ' -p' . env('DB_PASSWORD') . ' create ' . $database . '');
+
                 shell_exec('mysql -u ' . env('DB_USERNAME') . ' -p' . env('DB_PASSWORD') . ' ' . $database . ' < ' . $sourceFolder . '/database/internexaschool.sql');
+
+          
 
                 $envFile = $destinationFolder . '/.env';
 
