@@ -67,6 +67,8 @@
                                     <th scope="col" data-visible="false">{{ __('id') }}</th>
                                     <th scope="col">{{ __('School Name') }}</th>
                                     <th scope="col">{{ __('Status') }}</th>
+                                    <th scope="col">{{ __('School UID') }}</th>
+                                    <th scope="col">{{ __('School URL') }}</th>
                                     <th scope="col">{{ __('Created Date') }}</th>
                                     <th data-events="actionEvents" scope="col" data-field="operate" data-sortable="false">{{ __('action') }}</th>
                                 </tr>
@@ -77,6 +79,8 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $school->school_name }}</td>
                                         <td>{{ ($school->status == 1) ?  "Active" : 'Inactive' }}</td>
+                                        <td>{{ $school->school_uid }}</td>
+                                        <td><a href="{{ $school->school_url }}" target="_blank">{{ $school->school_url }}</a></td>
                                         <td>{{ $school->created_at }}</td>
                                         <td>  
                                             <select required name="status" id="status" onchange="schoolStatus(this.value, {{ $school->id }})" class="form-control select2 valid" style="width:100%;" tabindex="-1" aria-hidden="true" aria-invalid="false">
