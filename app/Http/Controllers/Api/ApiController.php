@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Holiday;
+use App\Models\MasterSchool;
 use App\Models\SessionYear;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Password;
@@ -239,6 +240,38 @@ class ApiController extends Controller
             $response = array(
                 'error' => true,
                 'message' => trans('error_occurred'),
+                'code' => 103,
+            );
+        }
+        return response()->json($response);
+    }
+
+    protected function schoolAuth(Request $request) {
+        // dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'school_name' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $response = array(
+                'error' => true,
+                'message' => $validator->errors()->first(),
+                'code' => 102,
+            );
+            return response()->json($response);
+        }
+
+        try {
+            $data = MasterSchool::where('school_uid', $request->school_name)->first();
+            $response = array(
+                'error' => false,
+                'message' => "School Authontication Changed successfully.",
+                'data' => $data,
+                'code' => 200,
+            );
+        } catch (\Exception $e) {
+            $response = array(
+                'error' => true,
+                'message' => trans('error_occurred'). $e->getMessage(),
                 'code' => 103,
             );
         }

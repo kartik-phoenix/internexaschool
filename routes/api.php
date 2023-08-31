@@ -155,6 +155,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('current-session-year', [ApiController::class, 'getSessionYear']);
     Route::get('settings', [ApiController::class, 'getSettings']);
     Route::post('forgot-password', [ApiController::class, 'forgotPassword']);
+    Route::post('get-school', [ApiController::class, 'schoolAuth']);
 
     Route::group(['middleware' => ['auth:sanctum',]], function () {
         Route::post('change-password', [ApiController::class, 'changePassword']);
