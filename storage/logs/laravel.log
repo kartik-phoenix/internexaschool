@@ -1,0 +1,52 @@
+[2023-08-31 09:32:14] local.ERROR: Uncaught InvalidArgumentException: Please provide a valid cache path. in /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66
+Stack trace:
+#0 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(101): Illuminate\View\Compilers\Compiler->__construct()
+#1 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#2 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\Container\Container->build()
+#3 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(856): Illuminate\Container\Container->resolve()
+#4 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\Foundation\Application->resolve()
+#5 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(841): Illuminate\Container\Container->make()
+#6 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(120): Illuminate\Foundation\Application->make()
+#7 Command line code(1): app()
+#8 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught InvalidArgumentException: Please provide a valid cache path. in /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66
+Stack trace:
+#0 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(101): Illuminate\\View\\Compilers\\Compiler->__construct()
+#1 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\\View\\ViewServiceProvider->Illuminate\\View\\{closure}()
+#2 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#3 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(856): Illuminate\\Container\\Container->resolve()
+#4 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#5 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(841): Illuminate\\Container\\Container->make()
+#6 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(120): Illuminate\\Foundation\\Application->make()
+#7 Command line code(1): app()
+#8 {main}
+  thrown at /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66)
+[stacktrace]
+#0 {main}
+"} 
+[2023-08-31 09:42:14] local.ERROR: Uncaught InvalidArgumentException: Please provide a valid cache path. in /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66
+Stack trace:
+#0 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(101): Illuminate\View\Compilers\Compiler->__construct()
+#1 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\View\ViewServiceProvider->Illuminate\View\{closure}()
+#2 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\Container\Container->build()
+#3 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(856): Illuminate\Container\Container->resolve()
+#4 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\Foundation\Application->resolve()
+#5 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(841): Illuminate\Container\Container->make()
+#6 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(120): Illuminate\Foundation\Application->make()
+#7 Command line code(1): app()
+#8 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught InvalidArgumentException: Please provide a valid cache path. in /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66
+Stack trace:
+#0 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(101): Illuminate\\View\\Compilers\\Compiler->__construct()
+#1 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\\View\\ViewServiceProvider->Illuminate\\View\\{closure}()
+#2 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#3 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(856): Illuminate\\Container\\Container->resolve()
+#4 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#5 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(841): Illuminate\\Container\\Container->make()
+#6 /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(120): Illuminate\\Foundation\\Application->make()
+#7 Command line code(1): app()
+#8 {main}
+  thrown at /var/www/html/internexaschool/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66)
+[stacktrace]
+#0 {main}
+"} 

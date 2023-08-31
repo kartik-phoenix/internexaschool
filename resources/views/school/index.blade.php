@@ -80,7 +80,7 @@
                                         <td>{{ $school->school_name }}</td>
                                         <td>{{ ($school->status == 1) ?  "Active" : 'Inactive' }}</td>
                                         <td>{{ $school->school_uid }}</td>
-                                        <td><a href="{{ $school->school_url }}" target="_blank">{{ $school->school_url }}</a></td>
+                                        <td><a href="{{ $school->school_url }}" target="_blank">{{ substr($school->school_url, 0, 25) }}</a></td>
                                         <td>{{ $school->created_at }}</td>
                                         <td>  
                                             <select required name="status" id="status" onchange="schoolStatus(this.value, {{ $school->id }})" class="form-control select2 valid" style="width:100%;" tabindex="-1" aria-hidden="true" aria-invalid="false">
