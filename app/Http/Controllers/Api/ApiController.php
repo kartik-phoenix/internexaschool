@@ -262,7 +262,7 @@ class ApiController extends Controller
 
         try {
             $data = MasterSchool::where('school_uid', $request->school_name)->first();
-            dd($data);
+            // dd($data);
 
             if (!empty($data) && $data != '') {
                 $response = array(
