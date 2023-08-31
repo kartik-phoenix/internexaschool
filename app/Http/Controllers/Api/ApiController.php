@@ -263,7 +263,7 @@ class ApiController extends Controller
         try {
             $data = MasterSchool::where('school_uid', $request->school_name)->first();
 
-            if ($data) {
+            if (!empty($data) && $data != '') {
                 $response = array(
                     'error' => false,
                     'message' => "School Authontication Changed successfully.",
