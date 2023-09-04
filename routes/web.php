@@ -241,6 +241,10 @@ use App\Http\Controllers\SubjectTeacherController;
         $settings = getSettings('privacy_policy');
         echo $settings['privacy_policy'];
     });
+    Route::get('public/terms-condition', function () {
+        $settings = getSettings('terms_condition');
+        echo $settings['terms_condition'];
+    });
     Route::get('clear', function () {
         Artisan::call('view:clear');
         Artisan::call('route:clear');

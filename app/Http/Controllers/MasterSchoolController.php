@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
+use PDO;
+use Symfony\Component\Process\Process;
 
 class MasterSchoolController extends Controller
 {
@@ -52,7 +56,7 @@ class MasterSchoolController extends Controller
     {
         $schoolUrl = env('SCHOOL_URL');
         $schoolPath = env('SCHOOL_PATH');
-        // dd($request->all());
+
         $schooldir = strtolower(preg_replace('/[\s-]+/', '', $request->school_name));
         $schooldir = str_replace(['\'', '"'], '', $schooldir);
 
@@ -190,7 +194,7 @@ class MasterSchoolController extends Controller
                     MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
                     
                     LOGO1=logo/TQqgNfkw68uPf3HUPOdc1PgwdIPHGyIvmBYtYBU7.svg
-                    LOGO2=logo/5Zq5Ay9Mt6aAPFkSeCb3U49PuD56bgpWE7yE0e5D.svg
+                    LOGO2=logo/8fkeGV19ZPBxbij0UzHHTJoAzjrTlJIx7OWEneTG.png
                     FAVICON=logo/rvF0JaTPJREU4OLfn6d5V4GInvqcjPpsxiVRhhoH.svg';
 
                 // Overwrite the content of the file
@@ -220,53 +224,54 @@ class MasterSchoolController extends Controller
                 // ];
 
                 // Database configuration
-                // $databaseConfig = [
-                //     'driver' => 'mysql',
-                //     'host' => env('DB_HOST'),
-                //     'port' =>  env('DB_PORT'),
-                //     'database' => $database,
-                //     'username' => env('DB_USERNAME'),
-                //     'password' => env('DB_PASSWORD'),
-                //     'timestamps' => false,
-                // ];
+                $databaseConfig = [
+                    'driver' => 'mysql',
+                    'host' => env('DB_HOST'),
+                    'port' =>  env('DB_PORT'),
+                    'database' => $database,
+                    'username' => env('DB_USERNAME'),
+                    'password' => env('DB_PASSWORD'),
+                    'timestamps' => false,
+                ];
 
-                // // // Establish the database connection
-                // $dbConnection = DB::connection('');
-                // $dbConnection->setPdo(new PDO(
-                //     "{$databaseConfig['driver']}:host={$databaseConfig['host']};port={$databaseConfig['port']};dbname={$databaseConfig['database']}",
-                //     $databaseConfig['username'],
-                //     $databaseConfig['password']
-                // ));
+                // // Establish the database connection
+                $dbConnection = DB::connection('mysql_school');
+                $dbConnection->setPdo(new PDO(
+                    "{$databaseConfig['driver']}:host={$databaseConfig['host']};port={$databaseConfig['port']};dbname={$databaseConfig['database']}",
+                    $databaseConfig['username'],
+                    $databaseConfig['password']
+                ));
 
                 // shell_exec('php '. $destinationFolder .'/artisan command:schooladmin 1 2');
 
                 // // Now you can use this connection for database operations
-                // $users = $dbConnection->table('users')->insert($user);
+                $password = env('SCHOOL_ADMIN_PASSWORD', 123456);
+                $users = $dbConnection->table('users')->where('id', 1)->update(['email'=> $request->school_email, 'password' => Hash::make($password)]);
 
-                // if ($users) {
-                //     $data = [
-                //         'subject' => 'Welcome to ' . $request->school_name,
-                //         'name' => $request->first_name,
-                //         'email' => $request->school_email,
-                //         'password' => $request->password,
-                //         'school_name' => $request->school_name
-                //     ];
-                //     Mail::send('teacher.email', $data, function ($message) use ($data) {
-                //         $message->to($data['email'])->subject($data['subject']);
-                //     });
+                if ($users) {
+                    $data = [
+                        'subject' => 'Welcome to ' . $request->school_name,
+                        'name' => '',
+                        'email' => $request->school_email,
+                        'password' => $password,
+                        'school_name' => $request->school_name
+                    ];
+                    Mail::send('teacher.email', $data, function ($message) use ($data) {
+                        $message->to($data['email'])->subject($data['subject']);
+                    });
 
-                //     $data = [
-                //         'subject' => $request->school_name . 'School Crated successfully',
-                //         'name' => $request->first_name,
-                //         'email' => env("SUPER_ADMIN_MAIL", 'test@gmail.com'),
-                //         'password' => $superAdminPass,
-                //         'school_name' => $request->school_name,
-                //         'database_name' => $request->school_name,
-                //     ];
-                //     Mail::send('teacher.email', $data, function ($message) use ($data) {
-                //         $message->to($data['email'])->subject($data['subject']);
-                //     });
-                // }
+                    // $data = [
+                    //     'subject' => $request->school_name . 'School Crated successfully',
+                    //     'name' => $request->first_name,
+                    //     'email' => env("SUPER_ADMIN_MAIL", 'test@gmail.com'),
+                    //     'password' => $superAdminPass,
+                    //     'school_name' => $request->school_name,
+                    //     'database_name' => $request->school_name,
+                    // ];
+                    // Mail::send('teacher.email', $data, function ($message) use ($data) {
+                    //     $message->to($data['email'])->subject($data['subject']);
+                    // });
+                }
 
                
 
@@ -287,6 +292,9 @@ class MasterSchoolController extends Controller
                 // shell_exec('mysqladmin -u ' . env('DB_USERNAME') . ' -p' . env('DB_PASSWORD') . ' create ' . $database . '');
                 // $cmd = shell_exec('php '. $destinationFolder .'/artisan migrate');
                 // dd($cmd);
+                shell_exec('php '. $destinationFolder .'/artisan optimize:clear');
+                // $data = shell_exec('php '. $destinationFolder .'/artisan db:seed --class=DummyDataSeeder');
+                // dd($data);
                 // shell_exec('php '. $destinationFolder .'/artisan db:seed --class=InstallationSeeder');
                 // shell_exec('php '. $destinationFolder .'/artisan db:seed --class=AddSuperAdminSeeder');
                 // php artisan command:schooladmin kartik kk kartik@gmail.com 12345678
@@ -333,8 +341,8 @@ class MasterSchoolController extends Controller
 
                 // Create a Symfony Process to change the directory
                 // chdir($destinationFolder);
-                // $process = new Process([Artisan::call('migrate')]);
-                // // $process = new Process(['cd', $destinationFolder]);
+                // // $process = new Process([Artisan::call('db:seed')]);
+                // $process = new Process(['cd', $destinationFolder]);
 
                 // // Run the process to change the directory
                 // $process->run();
@@ -342,9 +350,10 @@ class MasterSchoolController extends Controller
                 // // Check if the directory change was successful
                 // if ($process->isSuccessful()) {
                 //     // Now that we're in the first directory, call the Artisan command
-                //     echo $process->getOutput();
+                //     // echo $process->getOutput();
                 //     // Artisan::call('migrate');
                 //     // Artisan::call('db:seed', ['--class' => 'InstallationSeeder']);
+                //     Artisan::call('db:seed', ['--class' => 'DummyDataSeeder']);
                 //     // Artisan::call('db:seed', ['--class' => 'AddSuperAdminSeeder']);
                 //     // $commandName = 'command:schooladmin';
                 //     // $arguments = [$request->first_name, $request->last_name, $request->email, $request->password];
@@ -360,32 +369,6 @@ class MasterSchoolController extends Controller
                 //     // dd($process->getErrorOutput());
                 //     echo "Failed to change directory.";
                 // }
-
-
-                //  if($users){
-                // $data = [
-                //     'subject' => 'Welcome to ' . $request->school_name,
-                //     'name' => $request->first_name,
-                //     'email' => $request->school_email,
-                //     'password' => $request->password,
-                //     'school_name' => $request->school_name
-                // ];
-                // Mail::send('teacher.email', $data, function ($message) use ($data) {
-                //     $message->to($data['email'])->subject($data['subject']);
-                // });
-
-                // $superAdminPass = env("SUPER_ADMIN_PASS", 12345678);
-                // $data = [
-                //     'subject' => $request->school_name . 'School Crated successfully',
-                //     'name' => $request->first_name,
-                //     'email' => env("SUPER_ADMIN_MAIL", 'test@gmail.com'),
-                //     'password' => $superAdminPass,
-                //     'school_name' => $request->school_name,
-                //     'database_name' => $request->school_name,
-                // ];
-                // Mail::send('teacher.email', $data, function ($message) use ($data) {
-                //     $message->to($data['email'])->subject($data['subject']);
-                // });
 
                 return response()->json([
                     'message' => "Create school successfully",

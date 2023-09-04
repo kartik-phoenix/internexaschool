@@ -30,10 +30,10 @@
                                         <option value="0">Inactive</option>
                                     </select>
                                 </div> 
-                                {{-- <div class="form-group col-md-6 col-sm-12">
+                                <div class="form-group col-md-6 col-sm-12">
                                     <label>{{ __('school_email') }}</label>
                                     <input name="school_email" type="email" required placeholder="{{ __('school_email') }}" class="form-control"/>
-                                </div> --}}
+                                </div>
                             </div>
                             {{-- <div class="row">
                                 <div class="form-group col-md-6 col-sm-12">
